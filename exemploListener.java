@@ -95,6 +95,18 @@ public interface exemploListener extends ParseTreeListener {
 	 */
 	void exitWhile(exemploParser.WhileContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code for}
+	 * labeled alternative in {@link exemploParser#statm}.
+	 * @param ctx the parse tree
+	 */
+	void enterFor(exemploParser.ForContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code for}
+	 * labeled alternative in {@link exemploParser#statm}.
+	 * @param ctx the parse tree
+	 */
+	void exitFor(exemploParser.ForContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code return}
 	 * labeled alternative in {@link exemploParser#statm}.
 	 * @param ctx the parse tree
