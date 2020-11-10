@@ -1,8 +1,9 @@
 def sum(a b) {
-    return a+b;
+  return a+b;
 }
 def main() {
-  a = 12.7;
+  a = 19;
+  c = 1.5;
   
-  return 0;
+  return "ola";
 }
