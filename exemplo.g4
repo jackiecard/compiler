@@ -13,11 +13,15 @@ statms : '{' statm* '}'
        | statm
        ;
 
-statm : ID '=' expr ';'                                      # assign
+statm : ID '=' expr ';'                                           # assign
       | 'print' expr ';'                                          # print
       | 'if' cond=expr then=statms ('else' otherwise=statms)?     # if
       | 'while' cond=expr statms                                  # while
-      | 'for' '(' statms cond=expr? ';' expr? ')' statms          #for
+      | 'for' '(' statms cond=expr? ';' expr? ')' statms          # for
+      | 'switch' '(' expr ')' statms                              # switch
+      | 'case' expr ':' statms 'break;'                           # case
+      | 'default' ':' statms 'break;'                             # default
+      | 'return' cond=expr '?' exprs ':' exprs ';'                # ternary
       | 'return' expr ';'                                         # return
       ;
 
@@ -28,17 +32,16 @@ exprs : expr (',' expr)*
       ;
 
 expr : left=summ (op=('>'|'<'|'>='|'<='|'=='|'!=') right=expr)*
-      | atom
      ;
 
 summ : left=mult (op=('+'|'-') right=summ)*
      ;
 
-mult : left=atom (op=('*'|'/') right=mult)*
+mult : left=atom (op=('*'|'/') right=mult)* 
      ;
 
 atom : '(' expr ')'
-     | NUMBER
+     | number
      | STRING
      | ID
      | 'input'
@@ -49,7 +52,7 @@ INPUT : 'input';
 ELSE : 'else';
 ID : [a-zA-Z]+[0-9a-zA-Z]*;
 WS : [ \r\n\t]+ -> skip;
-NUMBER: INT | FLOAT;
+number: INT | FLOAT;
 INT : [0-9]+ ;
 FLOAT : INT ('.' INT)? ;
 STRING : '"' (~'"')* '"' ;
