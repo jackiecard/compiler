@@ -14,10 +14,11 @@ statms : '{' statm* '}'
        ;
 
 statm : ID '=' expr ';'                                           # assign
+      | ID '=' expr                                               # assignFor
       | 'print' expr ';'                                          # print
       | 'if' cond=expr then=statms ('else' otherwise=statms)?     # if
       | 'while' cond=expr statms                                  # while
-      | 'for' '(' statms cond=expr? ';' expr? ')' statms          # for
+      | 'for' '(' statms cond=expr ';' statm* ')' statms          # for
       | 'switch' '(' expr ')' statms                              # switch
       | 'case' expr ':' statms 'break;'                           # case
       | 'default' ':' statms 'break;'                             # default
@@ -42,7 +43,7 @@ mult : left=atom (op=('*'|'/') right=mult)*
 
 atom : '(' expr ')'
      | number
-     | STRING
+     | string
      | ID
      | 'input'
      | call
@@ -55,4 +56,4 @@ WS : [ \r\n\t]+ -> skip;
 number: INT | FLOAT;
 INT : [0-9]+ ;
 FLOAT : INT ('.' INT)? ;
-STRING : '"' (~'"')* '"' ;
+string : '"' (~'"')* '"' ;

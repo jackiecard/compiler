@@ -1,12 +1,8 @@
-def someFunc(a) {
-  print (a);
-}
-
 def main() {
   x = 3;
   a = 19;
   b = 1.5;
-  text = "some text";
+  text = 'some text';
 
   switch(a) {
     case 18: 
@@ -15,12 +11,9 @@ def main() {
     case 19: 
       b = 18;
       break;
-    default:
-      b = 1.5;
-      break;
   }
 
-  for (i = 0; i < 10; i = i + 1) {
+  for (i < 10; i = i + 1) {
     a = i;
   }
   
